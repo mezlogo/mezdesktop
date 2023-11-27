@@ -9,4 +9,4 @@ feature:
       - target: config
         link: $HOME/.ssh/config
   - name: systemd
-    value: ['ueser__ssh-agent.service']
+    value: ['user__ssh-agent.service']
