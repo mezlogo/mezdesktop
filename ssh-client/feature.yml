@@ -3,14 +3,10 @@ feature:
     value: ['create_dir_and_chmod.sh']
     order: 5
   - name: pacman
-    value: ['openssh', 'gnupg', 'pinentry']
+    value: ['openssh']
   - name: config
     value: 
       - target: config
         link: $HOME/.ssh/config
-      - target: gpg-agent.conf
-        link: $HOME/.gnupg/gpg-agent.conf
   - name: systemd
     value: ['user__ssh-agent.service']
-  - name: execfile
-    value: ['chmod_gnupg.sh']

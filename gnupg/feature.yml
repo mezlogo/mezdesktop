@@ -1,0 +1,12 @@
+feature:
+  - name: execfile
+    value: ['create_dir_and_chmod.sh']
+    order: 5
+  - name: pacman
+    value: ['gnupg', 'pinentry']
+  - name: config
+    value: 
+      - target: gpg-agent.conf
+        link: $HOME/.gnupg/gpg-agent.conf
+  - name: execfile
+    value: ['chmod_gnupg.sh']
