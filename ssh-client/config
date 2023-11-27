@@ -1,0 +1,14 @@
+User dmezentsev
+
+Compression yes
+
+ControlMaster auto
+ControlPersist 600
+#ControlPath ~/.ssh/sockets/%r@%h:%p
+ControlPath /tmp/sshsocket_%r@%h:%p
+
+CheckHostIP no
+
+AddKeysToAgent yes
+
+#PubkeyAcceptedKeyTypes +ssh-rsa
