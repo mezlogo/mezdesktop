@@ -1,0 +1,5 @@
+feature:
+  execfile: ['create_dir.sh']
+  config:
+    - target: configs/*
+      link: $HOME
