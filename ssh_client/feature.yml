@@ -9,6 +9,6 @@ feature:
       - target: config
         link: $HOME/.ssh/config
       - target: 00_ssh-client.sh
-        link: $HOME/.theprofile.d/00_ssh-client.sh
+        link: $DESKM_EXT_ENV_DIR/00_ssh-client.sh
   - name: systemd
     value: ['user__ssh-agent.service']

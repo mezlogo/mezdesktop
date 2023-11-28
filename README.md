@@ -15,3 +15,13 @@ It exports DESKM_EXT_ENV_DIR variable for using inside other features and script
 It exports DESKM_ENV_BIN_DIR variable for using inside other features
 
 3. `env_add_npm` sets npm local prefix AND adds npm's bin dir to path 
+
+## how to start from scratch
+
+1. install pikaur, openssh, git, nodejs and npm packages
+2. clone `https://github.com/mezlogo/deskmanager`
+2.1. exec `prepare.sh`
+3. clone `https://github.com/mezlogo/mezdesktop`
+3.1. exec `DESKMANAGER_EXEC="$HOME/repos/deskmanager/deskmanager-cli/bin/deskmanager.js --handler-dir $HOME/repos/deskmanager/deskmanager-contrib/src" ./initcore.sh`
+3.2. logout and login
+3.3. exec your profile version

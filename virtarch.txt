@@ -1,1 +1,5 @@
-ssh-client
+ext_env
+env_add_bin
+env_add_npm
+ssh_client
+zsh_interactive
