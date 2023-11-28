@@ -1,5 +1,4 @@
 feature:
-  execfile: ['create_dir.sh']
   config:
     - target: deskm.sh
       link: $DESKM_ENV_BIN_DIR/deskm.sh
