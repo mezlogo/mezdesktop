@@ -4,6 +4,7 @@ dm="$DESKMANAGER_EXEC"
 
 if [ -z "$dm" ]; then
     echo "please, set env var DESKMANAGER_EXEC to be deskmanager executable plus handler dir setted"
+    exit 1
 fi
 
 $dm --profile-name 01_ext_env.txt --feature-dir . install
