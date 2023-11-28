@@ -3,3 +3,4 @@ env_add_bin
 env_add_npm
 ssh_client
 zsh_interactive
+bin_deskmanager
