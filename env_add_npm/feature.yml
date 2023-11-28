@@ -1,0 +1,5 @@
+feature:
+  execfile: ['create_dir.sh']
+  config:
+    - target: 02_add_npm.sh
+      link: $DESKM_EXT_ENV_DIR/02_add_npm.sh

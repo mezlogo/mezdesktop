@@ -8,13 +8,11 @@ append_path () {
     esac
 }
 
-theprofiled="$HOME/.theprofile.d"
-if test -d "$theprofiled"; then
-	for profile in "${theprofiled}"/*.sh; do
-		test -r "$profile" && source "$profile"
-	done
-	unset profile
-fi
+export DESKM_EXT_ENV_DIR="$HOME/.theprofile.d"
+for profile in "${DESKM_EXT_ENV_DIR}"/*.sh; do
+    test -r "$profile" && source "$profile"
+done
+unset profile
 
 # Unload our profile API functions
 unset -f append_path

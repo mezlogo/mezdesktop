@@ -1,0 +1,2 @@
+env_add_bin
+env_add_npm
