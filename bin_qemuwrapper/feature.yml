@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: qemuwrapper
+      link: $DESKM_ENV_BIN_DIR/qemuwrapper

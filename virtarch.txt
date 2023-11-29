@@ -16,3 +16,4 @@ xorg
 xorg_i3wm
 xorg_apps
 xorg_virt_gpu_driver
+bin_qemuwrapper

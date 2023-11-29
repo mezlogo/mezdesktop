@@ -1,0 +1,233 @@
+#!/bin/env bash
+
+ProgName=$(basename $0)
+script_dirname=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+sub_create_disk() {
+    local SHORT=n:s:
+    local LONG=name:,size:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    local size
+    local name
+
+    while [ : ]; do
+    case "$1" in
+        -n | --name) name="$2"; shift 2; ;;
+        -s | --size) size="$2"; shift 2; ;;
+        --) shift; break; ;;
+    esac
+    done
+
+    if [ -z "$size" ]; then
+      echo "size is empty"
+      exit 1
+    fi
+
+    if [ -z "$name" ]; then
+      echo "name is empty"
+      exit 1
+    fi
+
+    if [[ ! $size =~ ^[0-9]+$ ]]; then
+        echo "size is not a number"
+        exit 1
+    fi
+
+    qemu-img create -f qcow2 "$name" "$size"G
+}
+
+sub_create_snapshot() {
+    local SHORT=n:,s:
+    local LONG=name:,snapshot:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    local name
+    local snapshot
+
+    while [ : ]; do
+    case "$1" in
+        -n | --name) name="$2"; shift 2; ;;
+        -s | --snapshot) snapshot="$2"; shift 2; ;;
+        --) shift; break; ;;
+    esac
+    done
+
+    if [ -z "$snapshot" ]; then
+      echo "snapshot is empty"
+      exit 1
+    fi
+
+    if [ -z "$name" ]; then
+      echo "name is empty"
+      exit 1
+    fi
+
+    qemu-img create -f qcow2 -b "$name" -F qcow2 "$snapshot"
+}
+
+sub_compress() {
+    local SHORT=n:
+    local LONG=name:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    local name
+
+    while [ : ]; do
+    case "$1" in
+        -n | --name) name="$2"; shift 2; ;;
+        --) shift; break; ;;
+    esac
+    done
+    if [ -z "$name" ]; then
+      echo "name is empty"
+      exit 1
+    fi
+
+    qemu-img convert -c -O qcow2 "$name" "compressed_$name"
+}
+
+sub_run() {
+    local arguments=(--enable-kvm -cpu host -machine q35 -m 2G)
+    arguments+=(-drive if=pflash,format=raw,readonly=on,file=/usr/share/edk2-ovmf/x64/OVMF_CODE.fd)
+
+    local output="-display gtk"
+
+    local SHORT=n:d:
+    local LONG=uefivars:,name:,disk:,iso:,boot:,cpu:,mem:,snapshot,display:,vnc:,forwardssh:,vga:,spiceapp,spice:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    while [ : ]; do
+    case "$1" in
+        --uefivars)
+            uefivars="$2"
+            shift 2;
+            arguments+=(-drive if=pflash,format=raw,file="$uefivars")
+            ;;
+        -n | --name)
+            name="$2";
+            shift 2;
+            arguments+=(-name $name);
+            ;;
+        -d | --disk)
+            disk="$2";
+            shift 2;
+            arguments+=(-hda $disk);
+            ;;
+        --mem)
+            mem="$2";
+            shift 2;
+            arguments+=(-m $mem);
+            ;;
+        --cpu)
+            cpu="$2";
+            shift 2;
+            arguments+=(-smp $cpu);
+            ;;
+        --iso)
+            iso="$2";
+            shift 2;
+            arguments+=(-cdrom $iso);
+            ;;
+        --boot)
+            boot="$2"
+            shift 2;
+            arguments+=(-boot $boot)
+            ;;
+        --display)
+            output="-display $2"
+            shift 2;
+            ;;
+        --snapshot)
+            shift;
+            arguments+=(-snapshot)
+            ;;
+        --vnc)
+            output="-display vnc=$2"
+            shift 2;
+            ;;
+        --forwardssh)
+            arguments+=(-nic user,hostfwd=tcp::$2-:22)
+            shift 2;
+            ;;
+        --vga)
+            arguments+=(-vga $2)
+            shift 2;
+            ;;
+        --spiceapp)
+            arguments+=(-device virtio-serial-pci)
+            arguments+=(-spice port=5930,addr=127.0.0.1,disable-ticketing=on)
+            arguments+=(-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0)
+            arguments+=(-chardev spicevmc,id=spicechannel0,name=vdagent)
+            output="-display spice-app"
+            shift;
+            ;;
+        --spice)
+            port="$2"
+            arguments+=(-device virtio-serial-pci)
+            arguments+=(-spice port="$port",addr=127.0.0.1,disable-ticketing=on)
+            arguments+=(-device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0)
+            arguments+=(-chardev spicevmc,id=spicechannel0,name=vdagent)
+            output=""
+            shift 2;
+            ;;
+        --) shift; break; ;;
+    esac
+    done
+
+    arguments+=($output)
+
+    # echo "$@"
+    # echo "${arguments[@]}"
+    qemu-system-x86_64 "${arguments[@]}"
+}
+
+sub_help() {
+    echo "Usage: $ProgName <subcommand>"
+    echo "Subcommands:"
+    echo "  create_disk [--name <name>] [--size <size_in_gb>]: creates qcow2 disk"
+    echo "  create_snapshot [--name <name>] [--snapshot <snapshotname>] creates qcow2 snapshopt"
+    echo "  compress [--name <name>]: compress qcow2 disk"
+    echo "  run [--name <name>] [--disk <disk>] [--iso <iso>] [--uefivars <file.fd>] [--cpu <cores>] [--mem <size>] [--boot <d|once=d|c(disk)|menu=on] [--snapshot] [--forwardssh <localport>] [--vga <vga>] [--spice <port>] [--spiceapp]: runs vm"
+}
+
+  
+subcommand=$1
+case $subcommand in
+    "" | "-h" | "--help")
+        sub_help
+        ;;
+    *)
+        shift
+        sub_${subcommand} $@
+        if [ $? = 127 ]; then
+            echo "Error: '$subcommand' is not a known subcommand." >&2
+            echo "  Run '$ProgName --help' for a list of known subcommands." >&2
+            exit 1
+        fi
+        ;;
+esac
