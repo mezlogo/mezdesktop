@@ -1,0 +1,5 @@
+feature:
+  execfile: ['create_dir.sh']
+  config:
+    - target: 03_add_zshd.sh
+      link: $DESKM_EXT_ENV_DIR/03_add_zshd.sh

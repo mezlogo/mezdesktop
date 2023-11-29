@@ -1,14 +1,6 @@
 feature:
-  - name: execfile
-    value: ['create_dir.sh']
-    order: 5
-  - name: pacman
-    value: ['zsh']
-  - name: config
-    value: 
-      - target: .zshrc
-        link: $HOME/.zshrc
-      - target: 30_export_zshd.sh
-        link: $DESKM_EXT_ENV_DIR/30_export_zshd.sh
-  - name: execfile
-    value: ['chsh_to_zsh.sh']
+  pacman: ['zsh']
+  config:
+    - target: .zshrc
+      link: $HOME/.zshrc
+  execfile: ['chsh_to_zsh.sh']

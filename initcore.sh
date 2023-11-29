@@ -12,6 +12,6 @@ $dm --profile-name 01_ext_env.txt --feature-dir . install
 
 source "$HOME/.theprofile"
 
-$dm --profile-name 02_env_bin_and_npm.txt --feature-dir . install
+$dm --profile-name 02_env_bin_npm_zsh.txt --feature-dir . install
 
 echo "logout or source ~/.theprofile"

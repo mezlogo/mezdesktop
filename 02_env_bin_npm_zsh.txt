@@ -1,2 +1,3 @@
 env_add_bin
 env_add_npm
+env_add_zshd
