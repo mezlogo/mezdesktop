@@ -1,4 +1,4 @@
 feature:
   config:
     - target: deskm.sh
-      link: $DESKM_ENV_BIN_DIR/deskm.sh
+      link: $DESKM_ENV_BIN_DIR/deskm
