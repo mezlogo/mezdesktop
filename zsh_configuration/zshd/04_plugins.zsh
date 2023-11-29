@@ -1,5 +1,5 @@
 function load_plugins() {
-  local zsh_plugins="$ZDOTDIR/zsh_plugins"
+  local zsh_plugins="$HOME/zsh_plugins"
   if [ -f "${zsh_plugins}.zsh" ]; then
     source ${zsh_plugins}.zsh
     return 0

@@ -1,0 +1,2 @@
+feature:
+  pacman: ['bat', 'fd', 'fzf', 'jq', 'btop', 'ripgrep']

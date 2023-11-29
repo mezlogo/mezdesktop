@@ -2,3 +2,5 @@ feature:
   config:
     - target: zshd/*
       link: $DESKM_ENV_ZSH_DIR
+    - target: zsh_plugins.txt
+      link: $HOME/zsh_plugins.txt
