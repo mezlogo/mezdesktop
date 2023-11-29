@@ -1,0 +1,186 @@
+#!/bin/env python
+import sys
+import subprocess
+from dataclasses import dataclass
+import os
+import stat
+import time
+
+FETCH_PATH = "FETCH_HEAD"
+FILE_NAME_SEPARATOR = "\n\t\t"
+
+class MyGit():
+    workPath: str
+    gitPath: str
+
+    def __init__(self, path: str):
+        splited = path.split(":")
+        self.workPath = splited[0]
+        self.gitPath = splited[1] if 1 != len(splited) else f"{self.workPath}/.git"
+
+    def name(self) -> str:
+        return self.workPath.split("/")[-1]
+
+    def lastFetch(self):
+        return os.stat(f"{self.gitPath}/{FETCH_PATH}")[stat.ST_MTIME]
+
+    def getTag(self, branch = 'HEAD'):
+        try:
+            return self.exec('describe', '--abbrev=0', '--tags', branch)
+        except:
+            return None
+
+    def exec(self, *command: str) -> str:
+        commands = list(command)
+        target = ['git', f"--work-tree={self.workPath}", f"--git-dir={self.gitPath}"]  
+        result = subprocess.run(target + commands, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+
+        if 0 != result.returncode:
+            raise ValueError("something goes wrong")
+
+        return str(result.stdout, 'utf-8').strip()
+
+    def getBranch(self) -> str:
+        return self.exec('branch', '--show-current')
+
+    def calcHeadStatus(self) -> str:
+        head_ahead = int(self.exec('rev-list', '--count', 'origin/master..HEAD'))
+        head_behind = int(self.exec('rev-list', '--count', 'HEAD..origin/master'))
+
+        head_status = "SAME"
+        if 0 < head_ahead and 0 < head_behind:
+            head_status = "BOTH"
+        elif 0 < head_ahead:
+            head_status = "AHEAD"
+        elif 0 < head_behind:
+            head_status = "BEHIND"
+
+        return head_status
+
+    def isDirty(self) -> bool:
+        return self.exec('status', '-s')
+
+class clrs:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+@dataclass
+class GitData:
+    name: str
+    last_fetch: int
+    tag: str
+    remote_tag: str
+    branch: str
+    tracked: str
+    head_status: str
+
+def rebase_git(path: str):
+    myGit = MyGit(path)
+    head_status = myGit.calcHeadStatus()
+    name = myGit.name()
+
+    if head_status in ["AHEAD", "SAME"]:
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: {colour(head_status, clrs.WARNING)} nothing to import")
+    else:
+        myGit.exec('rebase', '--autostash', 'origin/master')
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: {colour(head_status, clrs.WARNING)} rebased")
+
+def fetch_git(path: str):
+    myGit = MyGit(path)
+    myGit.exec('fetch', '-p')
+    head_status = myGit.calcHeadStatus() 
+    name = myGit.name()
+
+    print(f"{colour(name.ljust(8), clrs.OKCYAN)}: {colour(head_status, clrs.WARNING)}")
+
+def commit_git(path: str):
+    myGit = MyGit(path)
+    
+    name = myGit.name()
+   
+    if myGit.isDirty():
+        myGit.exec('commit', '-am', 'New version')
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: new commit")
+    else:
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: nothing to commit")
+
+def push_git(path: str):
+    myGit = MyGit(path)
+    head_status = myGit.calcHeadStatus()
+    name = myGit.name()
+   
+    if "SAME" == head_status:
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: nothing to push")
+    elif "AHEAD" == head_status:
+        myGit.exec('push', 'origin', 'master')
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: PUSHED")
+    else:
+        print(f"{colour(name.ljust(8), clrs.OKCYAN)}: {colour('SYNC FIRST', clrs.WARNING)}")
+
+
+
+def parse_git(path: str):
+    myGit = MyGit(path)
+
+    last_fetch = myGit.lastFetch()
+    tag = myGit.getTag()
+    remote_tag = myGit.getTag('origin/master')
+    branch = myGit.getBranch()
+    tracked = FILE_NAME_SEPARATOR.join(myGit.exec('status', '-s').split("\n"))
+    head_status = myGit.calcHeadStatus()
+    name = myGit.name()
+
+    return GitData(name, last_fetch, tag, remote_tag, branch, tracked, head_status)
+
+def colour(msg: str, c: str):
+    return f"{c}{msg}{clrs.ENDC}"
+
+def print_git_status(report: GitData):
+    now = int(time.mktime(time.localtime()))
+    last_fetch = round((now - report.last_fetch) / 3600, 2)
+    tag = "" if None == report.tag else report.tag
+    need_update = "" if report.tag == report.remote_tag else "NEED_UPDATE"
+    name = report.name
+    branch = "" if "master" == report.branch else report.branch
+    tracked = report.tracked
+    if (tracked):
+        tracked = f"\n\ttracked:{FILE_NAME_SEPARATOR}{tracked}"
+
+    print(f"{colour(name.ljust(8), clrs.OKCYAN)}: updated {last_fetch} hours ago {colour(report.head_status, clrs.WARNING)}  {colour(tag, clrs.OKGREEN)} {colour(need_update, clrs.WARNING)} {colour(branch, clrs.WARNING)} {tracked}")
+
+commandMapping = {
+    'status': lambda path: print_git_status(parse_git(path)),
+    'fetch': lambda path: fetch_git(path),
+    'rebase': lambda path: rebase_git(path),
+    'commit': lambda path: commit_git(path),
+    'push': lambda path: push_git(path),
+}
+
+def main(args):
+    if len(args) <= 1:
+        print("USAGE: command (status, fetch) repos...")
+        exit(-1)
+    
+    command = args[0]
+
+    method = commandMapping.get(command, None)
+
+    if None == method:
+        print(f"command: {command} not found. Supproted {commandMapping.keys()}")
+        exit(-1)
+    
+    for path in args[1:]:
+        try:
+            method(path)
+        except Exception as e:
+            print(f"something goes wrong for ${path}: ${e}")
+
+if __name__ == "__main__":
+   main(sys.argv[1:])

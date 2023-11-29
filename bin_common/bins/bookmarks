@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+ret_value="$(cat $HOME/exo/config/bookmarks.txt | grep -v '^#' | fzf --preview "val={}; echo \${val/\#\#\#*/}" --header "select a bookmark to copy" --preview-window "bottom:20%" --info inline)";
+if [ ! -z "$ret_value" ]; then
+  echo ${ret_value/\#\#\#*/} | sed -z '$ s/\n$//' | xsel -b;
+fi

@@ -1,0 +1,42 @@
+#!/bin/bash
+
+#pkgs: syncs package list between machines
+#usage: `pkgs [list [{installed,declared}]]`
+#pacman packages can be EXPLICITY installed and REQUIRED for some other package
+#implicitly installed and orphan (not required for any package) packages must be removed
+#commands:
+#- print list
+#- print explicitly installed
+#- print explicitly installed, but not exported to list
+#- print exported to list, but not installed
+#- remove orphans AND caches
+#- import: remove installed, but not exported to list AND install declared in list, but does not installed
+
+pkgsList="$HOME/.config/pkgs/$(cat /etc/hostname)"
+
+diffPkgs() { comm -$1 -3 <(printInstalled) <(printList) ; }
+
+printList() { cat $pkgsList | cut -d ',' -f1 | sort ; }
+printInstalled() { comm -23 <(pacman -Qqe | sort) <(pacman -Qqg base-devel | sort) ; }
+
+printNotInstalled() { diffPkgs 1 ; }
+printNotExported() { diffPkgs 2 ; }
+
+removeNotExported() { sudo pacman -Rns $(printNotExported) ; }
+installNotInstalled() { pikaur -S --needed $(printNotInstalled) ; }
+
+case "$1" in
+  "printList" | "pl") printList ;;
+  "printInstalled" | "pi") printInstalled ;;
+  "printNotExported" | "pne") printNotExported ;;
+  "printNotInstalled" | "pni") printNotInstalled ;;
+  "removeNotExported" | "rmne") removeNotExported ;;
+  "installNotInstalled" | "ini") installNotInstalled ;;
+  "export" | "e") printInstalled > $pkgsList ;;
+  "sync")
+    [[ ! -z $(printNotExported) ]] && removeNotExported || echo nothing to remove
+    [[ ! -z $(printNotInstalled) ]] && installNotInstalled || echo nothing to install
+    ;;
+  "status")  echo -e "explicitly installed, but not exported to list:\n------\n$(printNotExported)\n------\nexported to list, but not installed:\n------\n$(printNotInstalled)" ;;
+  *) echo "command $1 not found" && exit 1 ;;
+esac
