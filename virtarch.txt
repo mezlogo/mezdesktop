@@ -10,3 +10,4 @@ bin_deskmanager
 bin_common
 input_keyd
 git_config
+tmux

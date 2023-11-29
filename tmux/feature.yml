@@ -1,0 +1,5 @@
+feature:
+  pacman: ['tmux', 'tmux-plugin-manager']
+  config:
+    - target: tmux.conf
+      link: $HOME/.tmux.conf
