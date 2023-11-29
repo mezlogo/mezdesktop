@@ -1,5 +1,5 @@
 feature:
-  pacman: ['zsh']
+  pacman: ['zsh', 'zsh-antidote']
   config:
     - target: .zshrc
       link: $HOME/.zshrc

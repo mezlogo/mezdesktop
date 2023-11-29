@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: bins/*
+      link: $DESKM_ENV_BIN_DIR

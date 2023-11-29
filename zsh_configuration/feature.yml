@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: zshd/*
+      link: $DESKM_ENV_ZSH_DIR
