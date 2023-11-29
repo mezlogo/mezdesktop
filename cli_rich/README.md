@@ -7,3 +7,4 @@ Just a set of modern packages for cli usage:
 - fd vs find
 - jq for quering json
 - fzf for fuzzing interactive menu
+- autojump for folder bookmarks

@@ -1,0 +1,6 @@
+feature:
+  pacman: ['keyd']
+  systemd: ['keyd.service']
+  config:
+    - target: keyd.conf
+      link: /etc/keyd/default.conf

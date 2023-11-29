@@ -8,3 +8,5 @@ zsh_interactive
 zsh_configuration
 bin_deskmanager
 bin_common
+input_keyd
+git_config

@@ -1,0 +1,25 @@
+#BUILD TOOLS OUTPUT
+build
+target
+artifacts
+dist
+node_modules
+out
+.env
+.gradle
+gradlew
+gradlew.bat
+gradle
+package-lock.json
+__pycache__
+
+#TMP FILES
+~*
+*~
+
+#IDEA
+.idea
+*.iml
+.workspace
+workspace
+.vscode

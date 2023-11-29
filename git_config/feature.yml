@@ -1,0 +1,7 @@
+feature:
+  pacman: ['git']
+  config:
+    - target: .gitconfig
+      link: $HOME/.gitconfig
+    - target: .gitignore
+      link: $HOME/.gitignore
