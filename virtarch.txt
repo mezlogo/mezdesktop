@@ -12,3 +12,5 @@ input_keyd
 git_config
 tmux
 jvm
+xorg_i3wm
+xorg_apps
