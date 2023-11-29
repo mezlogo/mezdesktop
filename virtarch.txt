@@ -2,6 +2,7 @@ ext_env
 env_add_bin
 env_add_npm
 ssh_client
+nm_openvpn
 cli_rich
 zsh_interactive
 zsh_configuration
