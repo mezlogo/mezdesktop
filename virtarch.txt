@@ -12,5 +12,7 @@ input_keyd
 git_config
 tmux
 jvm
+xorg
 xorg_i3wm
 xorg_apps
+xorg_virt_gpu_driver

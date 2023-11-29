@@ -1,0 +1,2 @@
+feature:
+  pacman: ['xf86-video-qxl', 'spice-vdagent', 'x-resize']
