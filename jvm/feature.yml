@@ -1,0 +1,2 @@
+feature:
+  pacman: ['maven363', 'jdk17-openjdk', 'openjdk17-src', 'gradle']
