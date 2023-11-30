@@ -1,0 +1,4 @@
+exec "xkbcomp -w 0 ~/.config/xkb/xkbdump $DISPLAY"
+exec "greenclip daemon"
+exec "dunst"
+exec "nm-applet"

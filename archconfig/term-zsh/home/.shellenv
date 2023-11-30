@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+export PATH="/home/mezlogo/tools/node14/bin:$PATH"
+
+export TERMINAL=/usr/bin/alacritty
+export XDG_CONFIG_HOME="$HOME/.config"
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+export SSH_AUTH_SOCK=/tmp/ssh-agent.socket
+export EDITOR=nvim
+export VISUAL=nvim
+export BASH_ENV="$HOME/.profile"
+export EXO="$HOME/exo"
+export PATH="$HOME/bin:$HOME/.local/bin:$PATH"
+
+[ -e "$EXO/config/shell/sourceit.sh" ] && source "$EXO/config/shell/sourceit.sh"

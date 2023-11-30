@@ -1,0 +1,4 @@
+nm-connection-editor
+network-manager-applet
+openconnect
+networkmanager-openconnect

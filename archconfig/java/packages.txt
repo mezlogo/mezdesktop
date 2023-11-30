@@ -1,0 +1,8 @@
+jdk17-openjdk
+openjdk17-doc
+openjdk17-src
+maven363
+gradle
+gradle-doc
+gradle-src
+intellij-idea-community-edition
