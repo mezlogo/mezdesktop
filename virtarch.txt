@@ -16,6 +16,6 @@ xorg_base
 xorg_i3wm
 xorg_desktop
 xorg_input
-xorg_virt_gpu_driver
+xorg_qxl_spice
 bin_qemuwrapper
 kernel_no_beep
