@@ -12,8 +12,10 @@ input_keyd
 git_config
 tmux
 jvm
-xorg
+xorg_base
 xorg_i3wm
-xorg_apps
+xorg_desktop
+xorg_input
 xorg_virt_gpu_driver
 bin_qemuwrapper
+kernel_no_beep

@@ -1,4 +1,0 @@
-feature:
-  pacman: ['rofi', 'rofi-greenclip', 'alacritty', 'firefox', 'visual-studio-code-bin', 'mpv']
-  systemd: ['user__greenclip.service', 'user__pipewire.socket', 'user__wireplumber.service']
-  execfile: ['init_groups.sh']

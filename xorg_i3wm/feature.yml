@@ -1,2 +1,7 @@
 feature:
-  pacman: ['i3-wm', 'i3blocks', 'xsel', 'wireplumber', 'pipewire-jack', 'gnu-free-fonts', 'noto-fonts', 'ttf-bitstream-vera', 'ttf-croscore', 'ttf-dejavu', 'ttf-droid', 'ttf-liberation', 'nerd-fonts']
+  pacman: ['i3-wm', 'i3blocks']
+  config:
+    - target: i3
+      link: $HOME/.config/i3
+    - target: i3blocks
+      link: $HOME/.config/i3blocks

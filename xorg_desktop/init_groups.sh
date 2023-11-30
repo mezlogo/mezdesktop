@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 command="$1"
-target_groups=(video)
-installed_groups="$(id -nG $USER)"
 
 case "$1" in
   install)
+    GROUP="video"
+    if id -nG "$USER" | grep -qw "$GROUP"; then
+        sudo usermod -aG $GROUP $USER
+    fi
     ;;
 
   *)

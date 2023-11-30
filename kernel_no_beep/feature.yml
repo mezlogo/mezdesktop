@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: nobeep.conf
+      link: /etc/modprobe.d/nobeep.conf
