@@ -1,4 +1,4 @@
 feature:
-  pacman: ['rofi', 'rofi-greenclip', 'alacritty', 'firefox', 'visual-studio-code-bin', 'mpv', 'flameshot', 'light', 'dunst', 'nm-connection-editor', 'network-manager-applet', 'openconnect','networkmanager-openconnect']
+  pacman: ['rofi', 'rofi-greenclip', 'alacritty', 'firefox', 'visual-studio-code-bin', 'mpv', 'flameshot', 'light', 'dunst', 'nm-connection-editor', 'network-manager-applet', 'openconnect','networkmanager-openconnect', 'webkit2gtk-4.1', 'gcr']
   systemd: ['user__greenclip.service', 'user__pipewire.socket', 'user__wireplumber.service']
   execfile: ['init_groups.sh']
