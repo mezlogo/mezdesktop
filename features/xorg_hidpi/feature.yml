@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: .Xresources
+      link: $HOME/.Xresources
