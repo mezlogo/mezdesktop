@@ -1,0 +1,101 @@
+#!/bin/env bash
+
+ProgName=$(basename $0)
+script_dirname=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+
+sub_create_swap() {
+    local SHORT=n:s:
+    local LONG=name:,size:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    local size
+    local name
+
+    while [ : ]; do
+    case "$1" in
+        -n | --name) name="$2"; shift 2; ;;
+        -s | --size) size="$2"; shift 2; ;;
+        --) shift; break; ;;
+    esac
+    done
+
+    if [ -z "$size" ]; then
+      echo "size is empty"
+      exit 1
+    fi
+
+    if [ -z "$name" ]; then
+      echo "name is empty"
+      exit 1
+    fi
+
+    if [[ ! $size =~ ^[0-9]+$ ]]; then
+        echo "size is not a number"
+        exit 1
+    fi
+
+    dd if=/dev/zero of="$name" bs=1M count="$size"k status=progress
+    sudo chown root:root "$name"
+    sudo chmod 0600 "$name"
+    sudo mkswap -U clear "$name"
+    sudo swapon "$name"
+}
+
+sub_remove_swap() {
+    local SHORT=n:
+    local LONG=name:
+    local VALID_ARGS=$(getopt --options $SHORT --longoptions $LONG -- "$@")
+
+    if [[ $? -ne 0 ]]; then
+        exit 1;
+    fi
+
+    eval set -- "$VALID_ARGS"
+
+    local name
+
+    while [ : ]; do
+    case "$1" in
+        -n | --name) name="$2"; shift 2; ;;
+        --) shift; break; ;;
+    esac
+    done
+
+    if [ -z "$name" ]; then
+      echo "name is empty"
+      exit 1
+    fi
+
+    sudo swapoff "$name"
+    sudo rm "$name"
+}
+
+sub_help() {
+    echo "Usage: $ProgName <subcommand>"
+    echo "Subcommands:"
+    echo "  create_swap [--name <name>] [--size <size_in_gb>]   : creates and mount swap file"
+    echo "  remove_swap [--name <name>]                         : unmounts and removes swap file"
+}
+
+  
+subcommand=$1
+case $subcommand in
+    "" | "-h" | "--help")
+        sub_help
+        ;;
+    *)
+        shift
+        sub_${subcommand} $@
+        if [ $? = 127 ]; then
+            echo "Error: '$subcommand' is not a known subcommand." >&2
+            echo "  Run '$ProgName --help' for a list of known subcommands." >&2
+            exit 1
+        fi
+        ;;
+esac
