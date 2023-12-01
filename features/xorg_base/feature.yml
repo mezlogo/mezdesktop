@@ -1,2 +1,3 @@
 feature:
-  pacman: ['xorg', 'xorg-apps', 'xsel', 'wireplumber', 'pipewire-jack', 'noto-fonts', 'ttf-bitstream-vera', 'ttf-croscore', 'ttf-dejavu', 'ttf-droid', 'ttf-liberation', 'nerd-fonts']
+  pacman: ['xorg', 'xorg-apps', 'xsel', 'wireplumber', 'pipewire', 'pipewire-jack', 'pipewire-pulse', 'noto-fonts', 'ttf-bitstream-vera', 'ttf-croscore', 'ttf-dejavu', 'ttf-droid', 'ttf-liberation', 'nerd-fonts']
+  systemd: ['user__wireplumber.service', 'user__pipewire.service', 'user__pipewire-pulse.service']
