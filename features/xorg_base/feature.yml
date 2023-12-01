@@ -1,2 +1,2 @@
 feature:
-  pacman: ['xorg', 'xorg-apps', 'xsel', 'wireplumber', 'pipewire-jack', 'gnu-free-fonts', 'noto-fonts', 'ttf-bitstream-vera', 'ttf-croscore', 'ttf-dejavu', 'ttf-droid', 'ttf-liberation', 'nerd-fonts']
+  pacman: ['xorg', 'xorg-apps', 'xsel', 'wireplumber', 'pipewire-jack', 'noto-fonts', 'ttf-bitstream-vera', 'ttf-croscore', 'ttf-dejavu', 'ttf-droid', 'ttf-liberation', 'nerd-fonts']

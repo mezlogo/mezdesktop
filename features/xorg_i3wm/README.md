@@ -4,7 +4,7 @@
 
 ## 2. xorg
 
-- fonts: `gnu-free-fonts` `noto-fonts` `ttf-bitstream-vera` `ttf-croscore` `ttf-dejavu` `ttf-droid` `ttf-liberation` `nerd-fonts`
+- fonts: `noto-fonts` `ttf-bitstream-vera` `ttf-croscore` `ttf-dejavu` `ttf-droid` `ttf-liberation` `nerd-fonts`
 - utils: `xsel`
 - audio: `wireplumber` `pipewire-jack`
 
