@@ -1,0 +1,3 @@
+feature:
+  package: ['bluez', 'bluez-utils']
+  systemd: ['bluetooth.service']

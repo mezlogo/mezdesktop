@@ -19,3 +19,5 @@ xorg_input
 xorg_amd
 bin_qemuwrapper
 kernel_no_beep
+config_vscode
+bluetooth
