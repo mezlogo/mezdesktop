@@ -8,6 +8,22 @@ if [ -z "$dm" ]; then
     exit 1
 fi
 
+mkdir -p ~/downloads
+ln -s $HOME/downloads $HOME/Downloads
+ln -s $HOME/downloads $HOME/Desktop
+ln -s $HOME/downloads $HOME/Documents
+
+mkdir -p ~/samba
+mkdir -p ~/tools
+mkdir -p ~/repos
+mkdir -p ~/bin
+mkdir -p ~/.theprofile.d
+mkdir -p ~/.zsh.d
+mkdir -p ~/.m2
+mkdir -p ~/.config
+mkdir -p ~/.local/npm/bin
+mkdir -p ~/.local/bin
+
 $dm --profile-name 01_ext_env.txt --feature-dir . install
 
 source "$HOME/.theprofile"

@@ -1,0 +1,90 @@
+{
+    "keyboard.dispatch": "keyCode",
+    "workbench.colorTheme": "Default Dark+",
+    "security.workspace.trust.untrustedFiles": "open",
+    "diffEditor.codeLens": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": false,
+    "files.trimFinalNewlines": true,
+    "workbench.startupEditor": "none",
+    "window.menuBarVisibility": "toggle",
+    "update.showReleaseNotes": false,
+    "vim.useSystemClipboard": false,
+    "vim.incsearch": true,
+    "vim.hlsearch": true,
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "vim.handleKeys": {
+        "<C-a>": false,
+        "<C-f>": false,
+        "<C-b>": false,
+        "<C-k>": false,
+        "<C-e>": false,
+        "<C-v>": false,
+        "<C-w>": false,
+        "<C-c>": false
+    },
+    "editor.fontSize": 16,
+    "editor.renderWhitespace": "all",
+    "editor.cursorStyle": "line",
+    "editor.wordWrap": "on",
+    "editor.accessibilitySupport": "off",
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "editor.formatOnSaveMode": "modificationsIfAvailable",
+    "editor.formatOnType": false,
+    "editor.minimap.showSlider": "always",
+    "editor.bracketPairColorization.enabled": true,
+    "explorer.openEditors.visible": 0,
+    "prettier.singleQuote": true,
+    "prettier.enable": true,
+    "prettier.tabWidth": 4,
+    "prettier.useTabs": false,
+    "prettier.semi": true,
+    "prettier.trailingComma": "es5",
+    "prettier.bracketSpacing": true,
+    "prettier.vueIndentScriptAndStyle": false,
+    "prettier.arrowParens": "avoid",
+    "less.lint.duplicateProperties": "warning",
+    "markdown.preview.fontSize": 16,
+    "files.enableTrash": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "debug.javascript.autoAttachFilter": "always",
+    "editor.largeFileOptimizations": false,
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "extensions.ignoreRecommendations": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[shellscript]": {
+        "editor.defaultFormatter": "foxundermoon.shell-format"
+    },
+    "[html]": {
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "git.openRepositoryInParentFolders": "never",
+    "[jsonc]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[typescript]": {
+        "editor.defaultFormatter": "vscode.typescript-language-features"
+    },
+    "[vue]": {
+        "editor.defaultFormatter": "Vue.volar"
+    },
+    "javascript.updateImportsOnFileMove.enabled": "never",
+    "window.zoomLevel": 1,
+    "workbench.activityBar.location": "hidden"
+}

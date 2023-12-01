@@ -1,4 +1,5 @@
 feature:
+  pacman: ['nodejs', 'npm']
   execfile: ['create_dir.sh']
   config:
     - target: 02_add_npm.sh

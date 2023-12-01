@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: settings.json
+      link: $HOME/.config/Code/User/settings.json

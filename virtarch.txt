@@ -1,6 +1,7 @@
 ext_env
 env_add_bin
 env_add_npm
+env_add_pip
 ssh_client
 cli_rich
 zsh_interactive

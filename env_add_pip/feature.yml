@@ -1,0 +1,6 @@
+feature:
+  pacman: ['python', 'python-pip', 'python-pipx']
+  execfile: ['create_dir.sh']
+  config:
+    - target: 02_add_pip.sh
+      link: $DESKM_EXT_ENV_DIR/02_add_pip.sh
