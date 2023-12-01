@@ -1,5 +1,5 @@
 Aloxaf/fzf-tab
-robobenklein/zdharma-history-search-multi-word
+zdharma/history-search-multi-word
 zsh-users/zsh-history-substring-search
 zdharma/fast-syntax-highlighting
 zsh-users/zsh-autosuggestions

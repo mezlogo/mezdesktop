@@ -9,8 +9,9 @@ bindkey -M viins '^A' beginning-of-line
 copy-to-xsel() {
   zle kill-buffer
   print -rn -- $CUTBUFFER | xsel -ib
-};
-zle -N copy-to-xsel
+}
+
+zle     -N            copy-to-xsel
 bindkey -M viins "^Y" copy-to-xsel
 
 # insert file selected by fzf
@@ -33,9 +34,19 @@ fzf-file-widget() {
   zle reset-prompt
   return $ret
 }
+
 zle     -N            fzf-file-widget
 bindkey -M vicmd '^T' fzf-file-widget
 bindkey -M viins '^T' fzf-file-widget
 
 bindkey -M vicmd '^q' accept-and-hold
 bindkey -M viins '^q' accept-and-hold
+
+bindkey -M viins '^R' history-search-multi-word
+bindkey -M vicmd '^R' history-search-multi-word
+
+bindkey -M viins '^[[3~' delete-char
+bindkey -M vicmd '^[[3~' delete-char
+
+bindkey -M viins '^[.' insert-last-word
+bindkey -M vicmd '^[.' insert-last-word

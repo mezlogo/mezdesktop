@@ -12,12 +12,6 @@
     "vim.useSystemClipboard": false,
     "vim.incsearch": true,
     "vim.hlsearch": true,
-    "vim.insertModeKeyBindings": [
-        {
-            "before": ["j", "j"],
-            "after": ["<Esc>"]
-        }
-    ],
     "vim.handleKeys": {
         "<C-a>": false,
         "<C-f>": false,
@@ -85,6 +79,6 @@
         "editor.defaultFormatter": "Vue.volar"
     },
     "javascript.updateImportsOnFileMove.enabled": "never",
-    "window.zoomLevel": 1,
-    "workbench.activityBar.location": "hidden"
+    "workbench.activityBar.location": "hidden",
+    "window.zoomLevel": -3
 }
