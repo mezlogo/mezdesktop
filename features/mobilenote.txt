@@ -8,6 +8,7 @@ zsh_interactive
 zsh_configuration
 bin_deskmanager
 bin_common
+bin_tools
 input_keyd
 git_config
 tmux
@@ -19,7 +20,7 @@ xorg_input
 xorg_amd
 xorg_hidpi
 xorg_mobilenote_monitors
-bin_qemuwrapper
 kernel_no_beep
 config_vscode
 bluetooth
+docker

@@ -8,6 +8,7 @@ zsh_interactive
 zsh_configuration
 bin_deskmanager
 bin_common
+bin_tools
 input_keyd
 git_config
 tmux
@@ -17,5 +18,5 @@ xorg_i3wm
 xorg_desktop
 xorg_input
 xorg_qxl_spice
-bin_qemuwrapper
 kernel_no_beep
+docker

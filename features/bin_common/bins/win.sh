@@ -26,8 +26,8 @@ qemu-system-x86_64 \
   -cpu host,hv_relaxed,hv_spinlocks=0x1fff,hv_vapic,hv_time \
   -smp 4 \
   -enable-kvm \
-  -hda ~/win7x64.qcow \
+  -hda $HOME/win7x64.qcow2 \
   -m 2048 \
   -name "Windows" \
-  -net nic -net user,hostname=windowsvm,smb=$HOME/win \
+  -net nic -net user,hostname=windowsvm,smb=$HOME/samba \
   "$@"

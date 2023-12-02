@@ -1,0 +1,2 @@
+feature:
+  pacman: ['qemu-full', 'samba', 'virt-viewer', 'edk2-ovmf']

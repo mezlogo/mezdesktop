@@ -1,0 +1,6 @@
+feature:
+  config:
+    - target: $HOME/repos/mezdesktop/tools/trun/cli/build/install/trun/bin/trun
+      link: $DESKM_ENV_BIN_DIR/trun
+    - target: $HOME/repos/mezdesktop/tools/trun/cli/build/install/trun/completions/trun_completion
+      link: $DESKM_ENV_ZSH_DIR/80_trun_completion.zsh

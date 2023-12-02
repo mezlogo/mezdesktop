@@ -1,0 +1,4 @@
+feature:
+  pacman: ['docker', 'docker-compose']
+  systemd: ['docker.service']
+  execfile: ['init_groups.sh']

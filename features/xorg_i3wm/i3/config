@@ -22,7 +22,7 @@ default_floating_border pixel 2
 default_border pixel 1
 for_window [floating] border pixel 2
 
-font pango:DejaVuSansMono 14
+font pango:DejaVuSansMono 10
 
 focus_follows_mouse no
 popup_during_fullscreen smart
