@@ -30,4 +30,6 @@ source "$HOME/.theprofile"
 
 $dm --profile-name 02_env_bin_npm_zsh.txt --feature-dir . install
 
+sudo systemctl disable --now systemd-resolved.service
+
 echo "logout or source ~/.theprofile"

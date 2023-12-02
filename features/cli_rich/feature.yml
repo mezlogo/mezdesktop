@@ -1,2 +1,2 @@
 feature:
-  pacman: ['bat', 'fd', 'fzf', 'jq', 'btop', 'ripgrep', 'autojump-rs', 'tree']
+  pacman: ['bat', 'fd', 'fzf', 'jq', 'btop', 'ripgrep', 'autojump-rs', 'tree', 'zip', 'unzip']
