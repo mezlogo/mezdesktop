@@ -1,0 +1,2 @@
+feature:
+  pacman: ['nvidia', 'nvidia-utils']
