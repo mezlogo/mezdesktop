@@ -1,0 +1,4 @@
+feature:
+  config:
+    - target: 70-mighty_note_single_monitor.sh
+      link: /etc/X11/xinit/xinitrc.d/70-mighty_note_single_monitor.sh

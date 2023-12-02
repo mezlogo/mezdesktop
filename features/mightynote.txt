@@ -19,8 +19,9 @@ xorg_desktop
 xorg_input
 xorg_nvidia
 xorg_hidpi
-xorg_mobilenote_monitors
+xorg_mightynote_monitors
 kernel_no_beep
 config_vscode
 bluetooth
 docker
+qemu_vm
