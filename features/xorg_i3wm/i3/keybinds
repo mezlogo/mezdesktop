@@ -9,6 +9,7 @@ bindsym --release $mod+t exec --no-startup-id flameshot gui
 bindsym $mod+Return exec alacritty -e zsh -c 'tmux new-session -A -s default'
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec rofi -show drun
+bindsym $mod+q exec ~/.config/i3/scripts/layout.sh next
 
 bindsym $mod+x exec alacritty --class=floating_terminal -e sh -c "greenclip print | fzf -e | sed 's/\xC2\xA0/\x0A/g' | sed -z '$ s/\n$//' | xsel -b"
 for_window [class="^floating_terminal$"] floating enable, resize set 50 ppt 50 ppt

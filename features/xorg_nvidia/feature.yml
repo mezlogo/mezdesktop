@@ -1,2 +1,2 @@
 feature:
-  pacman: ['nvidia', 'nvidia-utils']
+  pacman: ['nvidia-lts', 'nvidia-utils']

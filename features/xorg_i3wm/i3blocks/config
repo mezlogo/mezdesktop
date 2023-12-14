@@ -3,36 +3,36 @@ separator=true
 #markup=none
 
 
+[layout]
+command=$HOME/.config/i3/scripts/layout.sh get-layout
+interval=once
+signal=3
+
 [battery]
-label=BAT
+label=󱐋
 command=cat /sys/class/power_supply/BAT0/capacity
 interval=30
 
 [volume]
 label=♪
-command=/home/mezlogo/.config/i3/scripts/volume.sh get-level
+command=$HOME/.config/i3/scripts/volume.sh get-level
 interval=once
 signal=1
 
 [backlight]
-label=♪
-command=/home/mezlogo/.config/i3/scripts/backlight.sh get-level
+label=
+command=$HOME/.config/i3/scripts/backlight.sh get-level
 interval=once
 signal=2
 
 [memory]
 command=awk '/MemAvailable/ { printf "%dMb\n", $2 / 1024 }' /proc/meminfo
-label=
+label=󰍛 
 interval=5
-
-[disk]
-command=df -h | awk '/\/home$/ { print $5 }'
-label=
-interval=10
 
 [load_average]
 command=cut -d ' ' -f1 /proc/loadavg
-label=
+label= 
 interval=1
 
 [time]

@@ -1,4 +1,4 @@
 feature:
-  pacman: ['nvtop', 'rofi', 'rofi-greenclip', 'alacritty', 'firefox', 'visual-studio-code-bin', 'mpv', 'flameshot', 'light', 'dunst', 'nm-connection-editor', 'network-manager-applet', 'openconnect','networkmanager-openconnect', 'webkit2gtk-4.1', 'gcr', 'telegram-desktop', 'brave-bin']
+  pacman: ['nvtop', 'rofi', 'rofi-greenclip', 'alacritty', 'firefox', 'visual-studio-code-bin', 'mpv', 'flameshot', 'light', 'dunst', 'nm-connection-editor', 'network-manager-applet', 'openconnect','networkmanager-openconnect', 'webkit2gtk-4.1', 'gcr', 'telegram-desktop', 'brave-bin', 'xkb-switch']
   systemd: ['user__greenclip.service']
   execfile: ['init_groups.sh']
